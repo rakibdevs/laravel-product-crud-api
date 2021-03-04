@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    /**
+     * User
+     * 
+     * Get User Uploaded By Product
+     *
+     * @return array Products
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +15,23 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['prefix' => 'v1' ], function () {
+    
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    # All Products
+    Route::get('products/all', [ProductController::class, 'all']);
+
+    Route::group(['middleware' => 'auth:api'], function() {
+    	# Auth Routes
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::post('refresh', [AuthController::class, 'refresh']);
+        Route::get('profile', [AuthController::class, 'profile']);
+        # Product Routes
+	    Route::resource('products', ProductController::class);
+	    Route::get('products/search', [ProductController::class, 'search']);
+	});
+
 });
+
