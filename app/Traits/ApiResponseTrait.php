@@ -8,12 +8,11 @@ use Illuminate\Http\Response;
  
 trait ApiResponseTrait {
 
-	public static function apiServerError($msg)
+	public static function apiServerError($message = "Internal Server Error")
 	{
 		return response()->json([
             'status' => false,
-            'message' => $msg,
-            'errors' => null,
+            'message' => $message,
             'data' => null,
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
 	}
@@ -23,7 +22,6 @@ trait ApiResponseTrait {
 		return response()->json([
             'status' => false,
             'message' => $message,
-            'errors' => $errors,
             'data' => null,
         ], $code);
 	}
@@ -33,7 +31,6 @@ trait ApiResponseTrait {
 		return response()->json([
             'status' => true,
             'message' => $message,
-            'errors' => null,
             'data' => $data,
         ], $code);
 	}

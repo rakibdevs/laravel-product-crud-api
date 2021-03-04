@@ -14,9 +14,9 @@ class ProductRequest extends FormRequest
     {
         return [
             'title'         => 'required|max:255',
-            'description'   => 'nullable|max:5000',
+            'description'   => 'nullable|max:3000',
             'price'         => 'required|numeric',
-            'image'     => 'nullable|image|mimes:png,jpg,jpeg,gif,webp|max:2048',
+            'image'         => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ];
     }
 
@@ -37,13 +37,13 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required'    => 'Please give product title',
-            'title.max'         => 'Please give product title maximum of 255 characters',
-            'description.max'   => 'Please give product description maximum of 5000 characters',
-            'price.required'    => 'Please give product price',
-            'price.numeric'     => 'Please give a numeric product price',
-            'image.image'       => 'Please give a valid product image',
-            'image.max'         => 'Product image max 2MB is allowed',
+            'title.required'    => 'Product title is missing!',
+            'title.max'         => 'Product title is too long!',
+            'description.max'   => 'Description is too long!',
+            'price.required'    => 'Product price is missing',
+            'price.numeric'     => 'Product price is not a numeric value',
+            'image.image'       => 'File should be an Image',
+            'image.max'         => 'Product image is too big. Maximum allow 2MB',
         ];
     }
 }

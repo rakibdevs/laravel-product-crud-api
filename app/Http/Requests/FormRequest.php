@@ -41,8 +41,7 @@ abstract class FormRequest extends ApiFormRequest
         throw new HttpResponseException(
             response()->json([
                 'status' => false,
-                'message' => null,
-                'errors' => $err,
+                'message' => $err[0],
                 'data' => null
             ])
         );

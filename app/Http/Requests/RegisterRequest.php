@@ -36,10 +36,10 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'     => 'Please give a name',
-            'email.required'    => 'Please give your email address',
-            'email.unique'      => 'UThis email has been used already',
-            'password.required' => 'Please give a password',
+            'name.required'     => 'User name is missing!',
+            'email.required'    => 'Email address is missing!',
+            'email.unique'      => 'This email has been used already!',
+            'password.required' => 'Password is missing'
         ];
     }
 }

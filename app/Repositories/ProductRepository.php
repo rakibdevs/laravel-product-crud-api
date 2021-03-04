@@ -36,6 +36,7 @@ class ProductRepository implements ApiCrudInterface{
     
     public function search($keyword, $perPage)
     {
+        return $keyword;
         $perPage = isset($perPage) ? $perPage : 10;
         return Product::where('title', 'like', '%'.$keyword.'%')
 	        ->orWhere('description', 'like', '%'.$keyword.'%')

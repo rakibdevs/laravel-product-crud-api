@@ -35,8 +35,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required'    => 'Please give your email',
-            'password.required' => 'Please give your password',
+            'email.required'    => 'Email address is missing',
+            'password.required' => 'Password is missing',
         ];
     }
 }
