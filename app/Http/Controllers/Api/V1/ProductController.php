@@ -48,7 +48,11 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {/*
+        if($request->hasFile('image')){
+            return ['like' => $request->file('image')];
+        }
+        return $request->all();*/
         try {
             $data = $this->productRepository->create($request->all());
             return self::apiResponseSuccess($data, 'New Product Added!');

@@ -13,7 +13,7 @@ class ProductRepository implements ApiCrudInterface{
     {
         return Product::orderBy('id', 'desc')
 	        ->with('user')
-	        ->get();
+	        ->paginate(10);
     }
 
     public function myProducts()
@@ -53,7 +53,6 @@ class ProductRepository implements ApiCrudInterface{
 
         // upload image file      
         $data['image']   = FileUploader::store('image', $data['image'], $data['title'] ,'gallery/products');  
-        
         return Product::create($data);
     }
 

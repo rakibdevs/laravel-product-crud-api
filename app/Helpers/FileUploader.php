@@ -23,7 +23,7 @@ class FileUploader
             $name  = $name . '.' . $file->getClientOriginalExtension();
         
             $file->move($loc, $name);
-            return $name;
+            return asset($loc.'/'.$name);
         }
 
   	}
@@ -31,7 +31,7 @@ class FileUploader
   	public static function update($field, $file, $title, $loc, $old)
   	{
         # remove old file
-  		self::delete($loc.'/'.$old);
+  		  self::delete($old);
         # store new file
         return self::store($field, $file, $title, $loc);
 	    	
