@@ -30,7 +30,7 @@ Route::group(['prefix' => 'v1' ], function () {
         Route::get('profile', [AuthController::class, 'profile']);
         # Product Routes
 	    Route::resource('products', ProductController::class);
-	    Route::get('products/search', [ProductController::class, 'search']);
+	    Route::get('product/search', [ProductController::class, 'search']);
 	});
 
 });
