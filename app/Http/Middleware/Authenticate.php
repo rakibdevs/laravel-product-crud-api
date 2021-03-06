@@ -29,7 +29,7 @@ class Authenticate extends Middleware
                 'status' => false,
                 'message' => 'Unauthorised Access',
                 'data' => null,
-            ])
+            ], JsonResponse::HTTP_UNAUTHORIZED)
         );
     }
 }

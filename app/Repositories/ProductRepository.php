@@ -13,7 +13,7 @@ class ProductRepository implements ApiCrudInterface{
     {
         return Product::orderBy('id', 'desc')
 	        ->with('user')
-	        ->paginate(10);
+	        ->paginate(9);
     }
 
     public function myProducts()
@@ -21,13 +21,13 @@ class ProductRepository implements ApiCrudInterface{
         return Product::orderBy('id', 'desc')
             ->with('user')
             ->where('user_id', auth()->guard()->user()->id)
-            ->paginate(10);
+            ->paginate(9);
     }
 
     
     public function paginate($perPage)
     {
-        $perPage = isset($perPage) ? $perPage : 10;
+        $perPage = isset($perPage) ? $perPage : 9;
         return Product::orderBy('id', 'desc')
 	        ->with('user')
 	        ->paginate($perPage);
@@ -36,7 +36,7 @@ class ProductRepository implements ApiCrudInterface{
     
     public function search($keyword, $perPage)
     {
-        $perPage = isset($perPage) ? $perPage : 10;
+        $perPage = isset($perPage) ? $perPage : 9;
         return Product::where('title', 'like', '%'.$keyword.'%')
 	        ->orWhere('description', 'like', '%'.$keyword.'%')
 	        ->orWhere('price', 'like', '%'.$keyword.'%')
@@ -50,8 +50,12 @@ class ProductRepository implements ApiCrudInterface{
     {
         $data['user_id'] = auth()->guard()->user()->id; 
 
-        // upload image file      
-        $data['image']   = FileUploader::store('image', $data['image'], $data['title'] ,'gallery/products');  
+        // upload image file
+        if(isset($data['image'])){ 
+            if($data['image'] != null && $data['image'] != '' && !is_string($data['image'])){
+                $data['image']   = FileUploader::store('image', $data['image'], $data['title'] ,'gallery/products');  
+            } 
+        }     
         return Product::create($data);
     }
 
@@ -65,11 +69,11 @@ class ProductRepository implements ApiCrudInterface{
     {
         $product = Product::find($id);
         if($product){
-            if($data['image'] != null && $data['image'] != ''){
-                $data['image']   = FileUploader::update('image', $data['image'], $data['title'] ,'gallery/products', $product->image);            
-            }else{
-                $data['image'] = $product->image;
-            }  
+            if(isset($data['image'])){ 
+                if($data['image'] != null && $data['image'] != '' && !is_string($data['image'])){
+                    $data['image']   = FileUploader::update('image', $data['image'], $data['title'] ,'gallery/products', $product->image);            
+                } 
+            }
             # update product
             $product->update($data);
 

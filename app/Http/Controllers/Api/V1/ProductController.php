@@ -93,12 +93,12 @@ class ProductController extends Controller
     {
         try {
             $data = $this->productRepository->update($id, $request->all());
-            if(count($data) > 0){
-                $msg = 'Product Updated Successfully !';
-                return self::apiResponseSuccess($data, $msg);
+            if(is_null($data)){
+                $msg = 'Product Not Found';
+                return self::apiResponseError(null, $msg , $this->not_found);
             }
-            $msg = 'Product Not Found';
-            return self::apiResponseError(null, $msg , $this->not_found);
+            $msg = 'Product Updated Successfully !';
+            return self::apiResponseSuccess($data, $msg);
 
         } catch (\Exception $e) {
             return self::apiServerError($e->getMessage());

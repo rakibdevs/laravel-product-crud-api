@@ -22,6 +22,7 @@ Route::group(['prefix' => 'v1' ], function () {
 
     # All Products
     Route::get('products/all', [ProductController::class, 'all']);
+    Route::get('product/search', [ProductController::class, 'search']);
 
     Route::group(['middleware' => 'auth:api'], function() {
     	# Auth Routes
@@ -30,7 +31,6 @@ Route::group(['prefix' => 'v1' ], function () {
         Route::get('profile', [AuthController::class, 'profile']);
         # Product Routes
 	    Route::resource('products', ProductController::class);
-	    Route::get('product/search', [ProductController::class, 'search']);
 	});
 
 });
