@@ -15,4 +15,4 @@ php artisan serve
 Postman API Documentation: https://documenter.getpostman.com/view/11223504/Tz5jffsv
 
 Test on postman,
-
+<img src="https://github.com/RakibDevs/laravel-product-crud-api/blob/master/public/postman%20api.jpg">
