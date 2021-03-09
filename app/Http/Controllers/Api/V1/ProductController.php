@@ -136,7 +136,13 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $data = $this->productRepository->search($request->keyword,$request->page);
+        $data = $this->productRepository->search($request->keyword,$request->page,null);
+        return self::apiResponseSuccess($data, 'Found '.count($data).' Products');
+    }
+
+    public function searchMyStore(Request $request)
+    {
+        $data = $this->productRepository->search($request->keyword,$request->page, auth()->guard()->user()->id);
         return self::apiResponseSuccess($data, 'Found '.count($data).' Products');
     }
 }

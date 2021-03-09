@@ -29,6 +29,7 @@ Route::group(['prefix' => 'v1' ], function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::get('profile', [AuthController::class, 'profile']);
+        Route::get('product/search-my-store', [ProductController::class, 'searchMyStore']);
         # Product Routes
 	    Route::resource('products', ProductController::class);
 	});

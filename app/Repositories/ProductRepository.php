@@ -34,10 +34,13 @@ class ProductRepository implements ApiCrudInterface{
     }
 
     
-    public function search($keyword, $perPage)
+    public function search($keyword, $perPage, $user == null)
     {
         $perPage = isset($perPage) ? $perPage : 9;
-        return Product::where('title', 'like', '%'.$keyword.'%')
+        return Product::when($user != null, function ($q) use ($user) {
+                return $q->where('user_id', $user);
+            })
+            ->where('title', 'like', '%'.$keyword.'%')
 	        ->orWhere('description', 'like', '%'.$keyword.'%')
 	        ->orWhere('price', 'like', '%'.$keyword.'%')
 	        ->orderBy('id', 'desc')
